@@ -18,8 +18,15 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "Categories",
     }
   );
-  Category.associate = function (models) {
-    // associations can be defined here
+  Category.associate = (models) => {
+    Category.hasMany(models.ProductCategory, {
+      foreignKey: "categoryId",
+    });
+    Category.belongsToMany(models.Product, {
+      through: models.ProductCategory,
+      foreignKey: "categoryId",
+      as: "products",
+    });
   };
   return Category;
 };

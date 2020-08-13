@@ -1,4 +1,7 @@
 "use strict";
+
+const { encrypt } = require("../utils/helpers");
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
@@ -11,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
       },
       names: DataTypes.STRING,
@@ -26,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "Users",
     }
   );
+  User.beforeSave(async (user, _options) => {
+    const hashedPwd = await encrypt(user.password);
+    user.setDataValue("password", hashedPwd);
+  });
+  User.afterCreate(async (user, _options) => {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>, send email or text message");
+  });
   User.associate = function (models) {
     // associations can be defined here
   };

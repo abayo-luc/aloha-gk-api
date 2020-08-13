@@ -1,39 +1,27 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Products", {
+    return queryInterface.createTable("Reviews", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      name: {
-        type: Sequelize.STRING,
+      productId: {
+        type: Sequelize.UUID,
         allowNull: false,
       },
-      price: {
-        type: Sequelize.FLOAT,
+      userId: {
+        type: Sequelize.UUID,
         allowNull: false,
       },
-      totalReviews: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      avRating: {
-        type: Sequelize.FLOAT,
-        defaultValue: 0,
-      },
-      totalItems: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      discountRate: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-      },
-      description: {
+      body: {
         type: Sequelize.STRING,
+      },
+      rating: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -46,6 +34,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Products");
+    return queryInterface.dropTable("Reviews");
   },
 };
