@@ -1,26 +1,16 @@
 const { Category, Review, Sequelize } = require("../../../models");
-
-const associatedModels = [
-  {
-    model: Category,
-    as: "categories",
-  },
-  {
-    model: Review,
-    as: "reviews",
-  },
-];
+import { productModels } from "../../../constants/associatedModels";
 
 export const allProductsQuery = (req, res, next) => {
   req.modelQuery = {
-    include: associatedModels,
+    include: productModels,
   };
   return next();
 };
 
 export const findOnequery = (req, res, next) => {
   req.modelQuery = {
-    include: associatedModels,
+    include: productModels,
   };
   return next();
 };

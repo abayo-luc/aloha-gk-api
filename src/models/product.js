@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+      categoryId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
     },
     {
       tableName: "Products",
@@ -47,13 +51,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "productId",
       as: "reviews",
     });
-    Product.hasMany(models.ProductCategory, {
-      foreignKey: "productId",
-    });
-    Product.belongsToMany(models.Category, {
-      through: models.ProductCategory,
-      foreignKey: "productId",
-      as: "categories",
+    Product.belongsTo(models.Category, {
+      foreignKey: "categoryId",
+      as: "category",
     });
   };
   return Product;

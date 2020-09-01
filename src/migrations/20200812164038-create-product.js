@@ -35,6 +35,10 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
+      categoryId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

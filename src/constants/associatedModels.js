@@ -2,7 +2,7 @@ import database from "../models";
 export const productModels = [
   {
     model: database.Category,
-    as: "categories",
+    as: "category",
   },
   {
     model: database.Review,
@@ -14,6 +14,5 @@ export const categoryModels = [
   {
     model: database.Product,
     as: "products",
-    through: { attributes: [] },
   },
 ];
