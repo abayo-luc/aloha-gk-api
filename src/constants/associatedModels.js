@@ -18,6 +18,10 @@ export const categoryModels = [
   {
     model: database.Product,
     as: "products",
+    include: {
+      model: database.Image,
+      as: "images",
+    },
   },
 ];
 

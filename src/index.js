@@ -7,12 +7,15 @@ import passportJwt from "./middlewares/passport";
 import adminRouter from "./api/admin";
 import routers from "./api";
 import adminRouters from "./api/admin";
+import registerEvents from "./middlewares/registerEvents";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 passport.use(passportJwt);
+
+registerEvents();
 app.use(passport.initialize());
 app.use("/api", routers);
 

@@ -33,7 +33,11 @@ module.exports = {
         defaultValue: 0,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      summary: {
+        type: Sequelize.TEXT,
       },
       categoryId: {
         type: Sequelize.UUID,
