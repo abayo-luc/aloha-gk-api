@@ -12,14 +12,20 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
+      image: DataTypes.STRING,
     },
     {
       tableName: "Categories",
     }
   );
   Category.associate = (models) => {
-    Category.hasMany(models.Product, {
+    Category.hasMany(models.ProductCategory, {
+      foreignKey: "categoryId",
+    });
+    Category.belongsToMany(models.Product, {
+      through: models.ProductCategory,
       foreignKey: "categoryId",
       as: "products",
     });

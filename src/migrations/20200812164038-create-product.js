@@ -16,6 +16,7 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
+      listPrice: Sequelize.FLOAT,
       totalReviews: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
@@ -24,7 +25,7 @@ module.exports = {
         type: Sequelize.FLOAT,
         defaultValue: 0,
       },
-      totalItems: {
+      inStock: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
@@ -32,17 +33,26 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },
-      description: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-      },
-      summary: {
+      fullDescription: {
         type: Sequelize.TEXT,
       },
-      categoryId: {
-        type: Sequelize.UUID,
-        allowNull: false,
+      shortDescription: {
+        type: Sequelize.TEXT,
       },
+      status: {
+        type: Sequelize.ENUM("active", "hidden", "disabled"),
+        defaultValue: "hidden",
+      },
+      minOrderQuantity: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      maxOrderQuantity: Sequelize.INTEGER,
+      availability: {
+        type: Sequelize.ENUM("all", "private", "public"),
+        defaultValue: "all",
+      },
+      promoText: Sequelize.TEXT,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

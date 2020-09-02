@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      description: {
+      listPrice: DataTypes.FLOAT,
+      fullDescription: {
         type: DataTypes.TEXT,
-        allowNull: false,
       },
-      summary: DataTypes.TEXT,
+      shortDescription: DataTypes.TEXT,
       avRating: {
         type: DataTypes.FLOAT,
         defaultValue: 0,
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
-      totalItems: {
+      inStock: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
@@ -38,10 +38,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
-      categoryId: {
-        type: DataTypes.UUID,
-        allowNull: false,
+      status: {
+        type: DataTypes.ENUM("active", "hidden", "disabled"),
+        defaultValue: "hidden",
       },
+      minOrderQuantity: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      maxOrderQuantity: DataTypes.INTEGER,
+      availability: {
+        type: DataTypes.ENUM("all", "private", "public"),
+        defaultValue: "all",
+      },
+      promoText: DataTypes.TEXT,
     },
     {
       tableName: "Products",
@@ -52,9 +62,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "productId",
       as: "reviews",
     });
-    Product.belongsTo(models.Category, {
-      foreignKey: "categoryId",
-      as: "category",
+    Product.hasMany(models.ProductCategory, {
+      foreignKey: "productId",
+    });
+    Product.belongsToMany(models.Category, {
+      through: models.ProductCategory,
+      foreignKey: "productId",
+      as: "categories",
     });
     Product.hasMany(models.Image, {
       foreignKey: "productId",

@@ -2,7 +2,8 @@ import database from "../models";
 export const productModels = [
   {
     model: database.Category,
-    as: "category",
+    as: "categories",
+    through: { attributes: [] },
   },
   {
     model: database.Review,
@@ -29,5 +30,16 @@ export const imageModels = [
   {
     model: database.Product,
     as: "product",
+  },
+];
+
+export const orderModles = [
+  {
+    model: database.User,
+    as: "customer",
+  },
+  {
+    model: database.OrderItems,
+    as: "items",
   },
 ];
