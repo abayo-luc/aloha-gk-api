@@ -8,6 +8,10 @@ export const productModels = [
     model: database.Review,
     as: "reviews",
   },
+  {
+    model: database.Image,
+    as: "images",
+  },
 ];
 
 export const categoryModels = [
