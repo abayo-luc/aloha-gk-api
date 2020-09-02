@@ -20,3 +20,10 @@ export const categoryModels = [
     as: "products",
   },
 ];
+
+export const imageModels = [
+  {
+    model: database.Product,
+    as: "product",
+  },
+];
