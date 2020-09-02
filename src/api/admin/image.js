@@ -4,5 +4,11 @@ import { imageModels as include } from "../../constants/associatedModels";
 
 export default crud("/images", Image, {
   getList: (filter, limit, offset, order) =>
-    Image.findAll({ filter, limit, offset, order, include }),
+    Image.findAndCountAll({
+      filter,
+      limit,
+      offset,
+      order,
+      include,
+    }),
 });
