@@ -4,4 +4,5 @@ export const appEvents = new EventEmitter();
 
 export default () => {
   appEvents.on("update_product_image", ImageHelper.updateImage);
+  appEvents.on("upload_product_image", ImageHelper.cloudinaryUpload);
 };
