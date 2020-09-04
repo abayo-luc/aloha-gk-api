@@ -52,7 +52,7 @@ export default class ImageHelpers {
           )
         );
 
-        Image.bulkCreate(
+        await Image.bulkCreate(
           results.map((result) => ({
             ...result,
             created_at: undefined,

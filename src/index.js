@@ -30,6 +30,7 @@ app.use("/api/v1", adminRouters);
  * Catch application error
  */
 app.use(function (err, req, res, next) {
+  console.log(err);
   res.status(500).json({
     message: err.message || "Action failed",
   });

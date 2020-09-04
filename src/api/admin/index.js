@@ -5,7 +5,7 @@ import categoryCrud from "./category";
 import reviewCrud from "./reviews";
 import imageCrud from "./image";
 import orderCrud from "./order";
-
+import productCategories from "./ProductCategory";
 adminRouters.use("/admin", [
   userCrud,
   productCrud,
@@ -13,6 +13,7 @@ adminRouters.use("/admin", [
   reviewCrud,
   imageCrud,
   orderCrud,
+  productCategories,
 ]);
 
 export default adminRouters;
