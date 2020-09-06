@@ -8,6 +8,7 @@ import adminRouter from "./api/admin";
 import routers from "./api";
 import adminRouters from "./api/admin";
 import registerEvents from "./middlewares/registerEvents";
+import { errors } from "celebrate";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/api/v1", adminRouters);
 /**
  * Catch application error
  */
+app.use(errors());
 app.use(function (err, req, res, next) {
   console.log(err);
   res.status(500).json({

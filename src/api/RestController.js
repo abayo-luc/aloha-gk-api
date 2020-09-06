@@ -31,7 +31,7 @@ class RestController {
     const { modelName, body } = req;
     return Model[modelName]
       .create(body)
-      .then((data) => res.json({ data }))
+      .then((data) => res.status(201).json({ data }))
       .catch((err) => MainController.handleControllerError(res, err));
   }
   static findOrCreate(req, res) {
@@ -46,6 +46,19 @@ class RestController {
           return res.json({ data });
         }
         await data.update({ body: req.body.body, rating: req.body.rating });
+        return res.json({ data });
+      })
+      .catch((err) => MainController.handleControllerError(res, err));
+  }
+  static getOne(req, res) {
+    const { modelName, modelQuery } = req;
+    return Model[modelName]
+      .findOne({
+        ...modelQuery,
+      })
+      .then((data) => {
+        if (!data) return res.status(404).json({ error: "Record not found" });
+
         return res.json({ data });
       })
       .catch((err) => MainController.handleControllerError(res, err));
