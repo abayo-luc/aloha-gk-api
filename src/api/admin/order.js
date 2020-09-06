@@ -21,4 +21,12 @@ export default crud("/orders", Order, {
       { ...options, include }
     );
   },
+  getList: (filter, limit, offset, order) =>
+    Order.findAndCountAll({
+      filter,
+      limit,
+      offset,
+      order,
+      include,
+    }),
 });

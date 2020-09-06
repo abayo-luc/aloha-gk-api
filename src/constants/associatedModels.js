@@ -37,9 +37,12 @@ export const orderModles = [
   {
     model: database.User,
     as: "customer",
+    attributes: {
+      exclude: ["password"],
+    },
   },
   {
-    model: database.OrderItems,
+    model: database.OrderItem,
     as: "items",
   },
 ];
