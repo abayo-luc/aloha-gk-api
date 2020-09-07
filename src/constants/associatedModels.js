@@ -44,5 +44,11 @@ export const orderModles = [
   {
     model: database.OrderItem,
     as: "items",
+    include: [
+      {
+        model: database.Product,
+        as: "product",
+      },
+    ],
   },
 ];
