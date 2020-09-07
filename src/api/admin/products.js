@@ -43,11 +43,10 @@ export default crud("/products", Product, {
     if (body.category_ids) {
       await product.setCategories(body.category_ids);
     }
-
-    appEvents.emit("update_product_image", { product, images: body.images });
     if (body.files?.length) {
-      await ImageHelper.updateImage({ product, files: body.files });
+      await ImageHelper.cloudinaryUpload({ product, files: body.files });
     }
+    appEvents.emit("update_product_image", { product, images: body.images });
 
     return product;
   },
