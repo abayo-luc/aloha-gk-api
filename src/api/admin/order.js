@@ -23,10 +23,14 @@ export default crud("/orders", Order, {
   },
   getList: (filter, limit, offset, order) =>
     Order.findAndCountAll({
-      filter,
+      where: filter,
       limit,
       offset,
       order,
+      include,
+    }),
+  getOne: (id) =>
+    Order.findByPk(id, {
       include,
     }),
 });

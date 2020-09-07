@@ -5,7 +5,7 @@ import { imageModels as include } from "../../constants/associatedModels";
 export default crud("/images", Image, {
   getList: (filter, limit, offset, order) =>
     Image.findAndCountAll({
-      filter,
+      where: filter,
       limit,
       offset,
       order,
