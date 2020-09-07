@@ -43,9 +43,12 @@ export default crud("/products", Product, {
     if (body.category_ids) {
       await product.setCategories(body.category_ids);
     }
-    if (body.files?.length) {
-      await ImageHelper.cloudinaryUpload({ product, files: body.files });
-    }
+
+    appEvents.emit("upload_product_image", {
+      productId: product.id,
+      files: body.files,
+    });
+
     appEvents.emit("update_product_image", { product, images: body.images });
 
     return product;

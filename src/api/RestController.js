@@ -4,7 +4,7 @@ class RestController {
   static getAll(req, res) {
     const { modelName, modelQuery } = req;
     return Model[modelName]
-      .findAll({ ...modelQuery })
+      .findAndCountAll({ ...modelQuery })
       .then((data) => res.json({ data }))
       .catch((err) => MainController.handleControllerError(res, err));
   }
