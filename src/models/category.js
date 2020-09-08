@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       image: DataTypes.STRING,
+      description: DataTypes.STRING,
     },
     {
       tableName: "Categories",
