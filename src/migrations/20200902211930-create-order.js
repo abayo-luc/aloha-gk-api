@@ -43,6 +43,10 @@ module.exports = {
         type: Sequelize.ENUM("ordered", "delivered", "cancelled"),
         defaultValue: "ordered",
       },
+      returned: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

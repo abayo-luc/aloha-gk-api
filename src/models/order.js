@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       reference: DataTypes.STRING,
       shippingId: DataTypes.INTEGER,
       taxId: DataTypes.INTEGER,
+      returned: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       tableName: "Orders",

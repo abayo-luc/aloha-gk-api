@@ -11,7 +11,4 @@ export default crud("/images", Image, {
       order,
       include,
     }),
-  destroy: () => {
-    throw new Error("Action not allowed");
-  },
 });
