@@ -1,0 +1,26 @@
+version: "3"
+services:
+  postgres:
+    container_name: "postgres"
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_USER: postgres
+      POSTGRES_DB: aloha_gk
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - aloha-gk-db:/var/lib/postgresql/data
+  app:
+    container_name: aloha-gk-api
+    restart: always
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "80:3000"
+    depends_on:
+      - postgres
+volumes:
+  aloha-gk-db:
