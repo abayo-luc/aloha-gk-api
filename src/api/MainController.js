@@ -8,7 +8,11 @@ const { JWT_SECRET_KEY } = process.env;
 class MainController {
   static home(req, res) {
     res.status(200).json({
-      message: "Hello world!",
+      message: "success",
+      data:{
+        version: 1,
+        name: 'AlohaGK API'
+      }
     });
   }
   static async generateJWT(payload) {

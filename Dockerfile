@@ -9,8 +9,10 @@ WORKDIR /user/app
 # where available (npm@5+)
 
 COPY package*.json ./
-
+COPY .sequelizerc ./
 RUN npm install
+
+RUN npm i -g sequelize-cli
 
 # If you are building your code for production
 # RUN npm install --only=production
@@ -19,8 +21,7 @@ RUN npm install
 COPY . .
 
 RUN npm run build 
-RUN npm run db:migrate
-COPY .env ./dist
+RUN NODE_ENV=production npm run db:migrate
 
 EXPOSE 3000 
 
