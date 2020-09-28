@@ -5,5 +5,5 @@ import { isAuthenticated } from "../../../middlewares/request";
 
 router.post("/sign-up", signUp);
 router.post("/sign-in", signIn);
-router.post("/current", isAuthenticated, RestController.getCurrentUser);
+router.get("/current", isAuthenticated, RestController.getCurrentUser);
 module.exports = router;
