@@ -8,7 +8,7 @@ import { allProductsQuery, findOnequery } from "./controller";
 import { createReview } from "../reviews/controller";
 
 router.use(attacheModel("Product"));
-router.route("/").get(allProductsQuery, RestController.getAll);
+router.route("/").get(allProductsQuery, RestController.findAndCountAll);
 router.route("/:id").get(findOnequery, RestController.getById);
 router
   .route("/:id/reviews")

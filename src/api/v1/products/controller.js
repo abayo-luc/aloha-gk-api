@@ -4,7 +4,9 @@ import { productModels } from "../../../constants/associatedModels";
 import { paginate, textSearch } from "../../../utils/queryHelpers";
 
 export const allProductsQuery = (req, res, next) => {
-  const { search, page = 1, limit = 25, category } = req.query;
+  const { search, page = 1, limit = 25, category, categoryId } = req.query;
+  const categoryQuery = {}
+  if(categoryId) categoryQuery.id = categoryId
   req.modelQuery = {
     include: [
       {
@@ -18,7 +20,7 @@ export const allProductsQuery = (req, res, next) => {
                   [Op.iLike]: `%${category || search}%`,
                 },
               }
-            : {}),
+            : categoryQuery),
         },
       },
       {

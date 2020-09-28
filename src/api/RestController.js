@@ -1,14 +1,20 @@
 const Model = require("../models");
 import MainController from "./MainController";
 class RestController {
-  static getAll(req, res) {
+  static findAndCountAll(req, res) {
     const { modelName, modelQuery } = req;
     return Model[modelName]
       .findAndCountAll({ ...modelQuery })
       .then((data) => res.json({ data }))
       .catch((err) => MainController.handleControllerError(res, err));
   }
-
+  static findAll(req, res) {
+    const { modelName, modelQuery } = req;
+    return Model[modelName]
+      .findAll({ ...modelQuery })
+      .then((data) => res.json({ data }))
+      .catch((err) => MainController.handleControllerError(res, err));
+  }
   static getById(req, res) {
     const {
       modelName,
