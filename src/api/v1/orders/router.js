@@ -10,7 +10,7 @@ router.get(
   isAuthenticated,
   attacheModel("Order"),
   OrderController.all,
-  RestController.getAll
+  RestController.findAndCountAll
 );
 router.post("/", isAuthenticated, createRules, OrderController.create);
 router.get(
