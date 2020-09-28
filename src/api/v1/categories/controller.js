@@ -8,7 +8,7 @@ export const allCategories = (req, res, next) => {
         [
           database.sequelize.fn(
             "COUNT",
-            database.sequelize.col("productcategories.id")
+            database.sequelize.col("productcategories.categoryId")
           ),
           "productsCounter",
         ],
@@ -21,7 +21,7 @@ export const allCategories = (req, res, next) => {
         attributes: [],
       },
     ],
-    group: ["Category.id", "productcategories.id"],
+    group: ["Category.id", "productcategories.categoryId"],
   };
   return next();
 };
