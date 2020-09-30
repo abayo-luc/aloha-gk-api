@@ -48,6 +48,12 @@ export const orderModles = [
       {
         model: database.Product,
         as: "product",
+        include: [
+          {
+            model: database.Image,
+            as: "images",
+          },
+        ],
       },
     ],
   },
