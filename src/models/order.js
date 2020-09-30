@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         defaultValue: 0.0,
       },
-      deliveryFee:{
+      deliveryFee: {
         type: DataTypes.FLOAT,
         defaultValue: 1000,
       },
@@ -45,10 +45,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      paid:{
+      paid: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
-      }
+        defaultValue: false,
+      },
     },
     {
       tableName: "Orders",
@@ -64,5 +64,17 @@ module.exports = (sequelize, DataTypes) => {
       as: "customer",
     });
   };
+  Order.hook("beforeUpdate", (order) => {
+    if (order.deliveryFee) {
+      const deliverFee = record.deliveryFee;
+      const subTotal = record.items.reduce((prev, current) => {
+        return prev + current.quantity * current.unitCost;
+      }, 0);
+      const totalAmount = subTotal + deliverFee;
+      record.deliverFee = deliverFee;
+      record.subTotal = subTotal;
+      record.totalAmount = totalAmount;
+    }
+  });
   return Order;
 };

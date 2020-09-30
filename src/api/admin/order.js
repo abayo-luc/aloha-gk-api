@@ -10,13 +10,14 @@ export default crud("/orders", Order, {
     throw new Error("Action not allowed");
   },
   update: (body, options) => {
-    const { shippedOn, status, comment, taxId } = body;
+    const { shippedOn, status, comment, taxId, deliveryFee } = body;
     return Order.update(
       {
         shippedOn,
         status,
         comment,
         taxId,
+        deliveryFee,
       },
       { ...options, include }
     );
