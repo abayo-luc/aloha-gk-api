@@ -6,7 +6,7 @@ import { paginate, textSearch } from "../../../utils/queryHelpers";
 export const allProductsQuery = (req, res, next) => {
   const { search, page = 1, limit = 25, category, categoryId } = req.query;
   const categoryQuery = {};
-  if (categoryId) categoryQuery.id = categoryId.split(',');
+  if (categoryId) categoryQuery.id = categoryId.split(",");
   req.modelQuery = {
     include: [
       {
@@ -34,7 +34,7 @@ export const allProductsQuery = (req, res, next) => {
     ],
     where: {
       ...textSearch(search, ["name", "fullDescription", "shortDescription"]),
-      status:'active'
+      status: "active",
     },
     order: [
       ["createdAt", "DESC"],

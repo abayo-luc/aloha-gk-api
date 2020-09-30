@@ -4,14 +4,14 @@ class RestController {
   static findAndCountAll(req, res) {
     const { modelName, modelQuery } = req;
     return Model[modelName]
-      .findAndCountAll({ ...modelQuery })
+      .findAndCountAll({ order: [["updatedAt", "DESC"]], ...modelQuery })
       .then((data) => res.json({ data }))
       .catch((err) => MainController.handleControllerError(res, err));
   }
   static findAll(req, res) {
     const { modelName, modelQuery } = req;
     return Model[modelName]
-      .findAll({ ...modelQuery })
+      .findAll({ order: [["updatedAt", "DESC"]], ...modelQuery })
       .then((data) => res.json({ data }))
       .catch((err) => MainController.handleControllerError(res, err));
   }
