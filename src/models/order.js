@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      paid:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
     },
     {
       tableName: "Orders",
