@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       as: "customer",
     });
   };
-  Order.hook("beforeUpdate", (order) => {
+  Order.beforeUpdate((order) => {
     if (order.deliveryFee) {
       const deliverFee = record.deliveryFee;
       const subTotal = record.items.reduce((prev, current) => {
