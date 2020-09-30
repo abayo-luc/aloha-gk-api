@@ -19,6 +19,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: 0.0,
       },
+      subTotal: {
+        type: DataTypes.FLOAT,
+        defaultValue: 0.0,
+      },
+      deliveryFee:{
+        type: DataTypes.FLOAT,
+        defaultValue: 1000,
+      },
       shippedOn: DataTypes.DATE,
       status: {
         type: DataTypes.ENUM("ordered", "delivered", "cancelled"),

@@ -30,12 +30,15 @@ export default class OrderController {
         body: { items },
         user,
       } = req;
-      const totalAmount = items.reduce((prev, current) => {
+      const deliverFee = 1000
+      const subTotal = items.reduce((prev, current) => {
         return prev + current.quantity * current.unitCost;
       }, 0);
       const order = await Order.create(
         {
-          totalAmount,
+          subTotal,
+          deliverFee,
+          totalAmount: subTotal + deliverFee,
           customerId: user.id,
           items,
         },
