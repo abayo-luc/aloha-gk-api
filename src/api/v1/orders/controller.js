@@ -1,15 +1,26 @@
 import { orderModles } from "../../../constants/associatedModels";
+import { paginate, textSearch } from "../../../utils/queryHelpers";
 import MainController from "../../MainController";
 
 const { Order, OrderItem } = require("../../../models");
 export default class OrderController {
   static async all(req, res, next) {
-    const { user } = req;
+    const {
+      user,
+      query: { search, page = 1, limit = 25, status },
+    } = req;
+    const moreQueries = {};
+    if (["ordered", "cancelled", "delivered"].includes(status))
+      moreQueries.status = status;
     req.modelQuery = {
       include: orderModles,
       where: {
+        ...textSearch(search, ["comment", "orderId", "totalAmount"]),
+        ...moreQueries,
         customerId: user.id,
       },
+      ...paginate({page, limit}),
+      distinct: "Order.id",
     };
     next();
   }

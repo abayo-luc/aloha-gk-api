@@ -34,6 +34,7 @@ export const allProductsQuery = (req, res, next) => {
     ],
     where: {
       ...textSearch(search, ["name", "fullDescription", "shortDescription"]),
+      status:'active'
     },
     order: [
       ["createdAt", "DESC"],
