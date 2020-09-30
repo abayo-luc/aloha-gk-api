@@ -9,18 +9,16 @@ export default crud("/orders", Order, {
   create: () => {
     throw new Error("Action not allowed");
   },
-  update: (body, options) => {
-    const { shippedOn, status, comment, taxId, deliveryFee } = body;
-    return Order.update(
-      {
-        shippedOn,
-        status,
-        comment,
-        taxId,
-        deliveryFee,
-      },
-      { ...options, include }
+  update: async (body, options) => {
+    const order = await Order.findOne(options);
+    if (!order) throw new Error(`Order doesn't exist`);
+    ["shippedOn", "status", "comment", "taxId", "deliveryFee"].forEach(
+      (key) => {
+        order[key] = body[key];
+      }
     );
+    await order.save();
+    return order;
   },
   getList: (filter, limit, offset, order) =>
     Order.findAndCountAll({
