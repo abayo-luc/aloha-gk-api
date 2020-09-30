@@ -11,7 +11,7 @@ export default class OrderController {
     } = req;
     const moreQueries = {};
     if (["ordered", "cancelled", "delivered"].includes(status))
-      moreQueries.status = status;
+      moreQueries.status =  status.split(',');
     req.modelQuery = {
       include: orderModles,
       where: {
