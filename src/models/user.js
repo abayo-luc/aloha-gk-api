@@ -30,13 +30,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "Users",
     }
   );
-  User.beforeSave(async (user, _options) => {
-    const hashedPwd = await encrypt(user.password);
-    user.setDataValue("password", hashedPwd);
-  });
-  User.afterCreate(async (user, _options) => {
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>, send email or text message");
-  });
   User.associate = function (models) {
     // associations can be defined here
   };

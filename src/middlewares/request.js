@@ -7,12 +7,28 @@ export const attacheModel = (model) => {
   };
 };
 
+export const protectAdmin = (req, user) => {
+  const isAdminRouter = [...req.originalUrl.split("v1")]
+    .pop()
+    .split("/")
+    .includes("admin");
+  if (!isAdminRouter) return false;
+  return !user.isAdmin;
+};
+
 export const isAuthenticated = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (err, user, _info) => {
     if (err || !user || isEmpty(user)) {
       return res.status(401).json({
         error: {
           message: err?.message || "Invalid or expired token",
+        },
+      });
+    }
+    if (protectAdmin(req, user)) {
+      return res.status(403).json({
+        error: {
+          message: "Access denied",
         },
       });
     }
